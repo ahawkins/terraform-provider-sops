@@ -2,8 +2,7 @@ version: "1.0"
 fail_fast: true
 stages:
   - prepare
-  - test
-  - build
+  - release
 
 steps:
   clone:
@@ -24,11 +23,10 @@ steps:
     tag: ${{CF_BUILD_ID}}
     disable_push: true
 
-  test:
-    stage: test
-    title: Test
+  build:
+    stage: release
+    title: Build
     image: "${{build_shell}}"
     working_directory: "${{clone}}"
     commands:
-      - gpg --import test/testing-key.pgp
-      - make test
+      - make crossbuild
