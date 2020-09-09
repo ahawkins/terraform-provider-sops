@@ -30,4 +30,4 @@ steps:
     working_directory: "${{clone}}"
     commands:
       - gpg --import test/testing-key.pgp
-      - make test build
+      - make test
