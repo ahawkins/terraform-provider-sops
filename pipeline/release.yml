@@ -37,4 +37,5 @@ steps:
     image: "${{build_shell}}"
     working_directory: "${{clone}}"
     commands:
+      - gpg --import "${CF_VOLUME_PATH}/keys/terraform-provider.gpg"
       - make crossbuild
