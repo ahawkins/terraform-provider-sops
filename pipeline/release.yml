@@ -48,4 +48,4 @@ steps:
         --local
         user.signingkey
         "$(cat "${CF_VOLUME_PATH}/keys/terraform-provider.id")"
-      - make crossbuild
+      - make release sign
