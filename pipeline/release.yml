@@ -11,7 +11,7 @@ steps:
     image: codefresh/cli
     commands:
       - mkdir -p "${CF_VOLUME_PATH}/keys"
-      - codefresh get context terrform-provider-gpg --output=json | jq -re '.key' > "${CF_VOLUME_PATH}/keys/terraform-provider.gpg"
+      - codefresh get context terraform-provider-gpg --output=json | jq -re '.key' > "${CF_VOLUME_PATH}/keys/terraform-provider.gpg"
 
   clone:
     stage: prepare
