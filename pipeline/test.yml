@@ -3,7 +3,6 @@ fail_fast: true
 stages:
   - prepare
   - test
-  - build
 
 steps:
   clone:
