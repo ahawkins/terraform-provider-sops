@@ -5,6 +5,14 @@ stages:
   - release
 
 steps:
+  fetch_gpg_key:
+    stage: prepare
+    title: Fetch GPG key
+    image: codefresh/cli
+    commands:
+      - mkdir -p "${CF_VOLUME_PATH}/keys/terraform-provider.gpg"
+      - codefresh get context terrform-provider-gpg --output=json | jq -re '.key' > "${CF_VOLUME_PATH}/keys/terraform-provider.gpg"
+
   clone:
     stage: prepare
     title: Clone
