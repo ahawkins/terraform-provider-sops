@@ -1,3 +1,3 @@
 FROM golang:1.13-alpine
 
-RUN apk add gnupg
+RUN apk add gnupg make
