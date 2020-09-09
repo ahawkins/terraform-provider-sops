@@ -1,11 +1,12 @@
 version: "1.0"
 fail_fast: true
 stages:
+  - prepare
   - test
 
 steps:
   clone:
-    stage: test
+    stage: prepare
     title: Clone
     type: git-clone
     repo: ${{CF_REPO_OWNER}}/${{CF_REPO_NAME}}
@@ -13,6 +14,7 @@ steps:
     git: github
 
   build_shell:
+    stage: prepare
     title: Build shell
     type: build
     working_directory: "${{clone}}/pipeline"
