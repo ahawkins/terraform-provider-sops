@@ -1,4 +1,4 @@
-module github.com/ahawkins/terraform-provider-sops
+module github.com/skillshare/terraform-provider-sops
 
 go 1.13
 

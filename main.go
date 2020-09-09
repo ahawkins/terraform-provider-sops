@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/ahawkins/terraform-provider-sops/sops"
+	"github.com/skillshare/terraform-provider-sops/sops"
 
 	"github.com/hashicorp/terraform-plugin-sdk/plugin"
 )
