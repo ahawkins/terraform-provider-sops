@@ -11,7 +11,6 @@ steps:
     commands:
       - mkdir -p "${CF_VOLUME_PATH}/keys"
       - codefresh get context terraform-provider-gpg --output=json --decrypt | jq -re '.spec.data.key' > "${CF_VOLUME_PATH}/keys/terraform-provider.gpg"
-      - gpg --list-packets "${CF_VOLUME_PATH}/keys/terraform-provider.gpg"  | grep -F keyid | head -n 1 | awk '{print $2}' > "${CF_VOLUME_PATH}/keys/terraform-provider.id"
 
   clone:
     stage: prepare
@@ -38,5 +37,15 @@ steps:
     working_directory: "${{clone}}"
     commands:
       - gpg --import "${CF_VOLUME_PATH}/keys/terraform-provider.gpg"
-      - git config --set --local user.signingkey "$(cat "${CF_VOLUME_PATH}/keys/terraform-provider.gpg")"
+      - >-
+        gpg --list-packets "${CF_VOLUME_PATH}/keys/terraform-provider.gpg"
+        | grep -F keyid
+        | head -n 1 |
+        awk '{print $2}' > "${CF_VOLUME_PATH}/keys/terraform-provider.id"
+      - >-
+        git
+        config
+        --set --local
+        user.signingkey
+        "$(cat "${CF_VOLUME_PATH}/keys/terraform-provider.gpg")"
       - make crossbuild
