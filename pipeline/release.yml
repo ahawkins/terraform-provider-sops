@@ -1,5 +1,4 @@
 version: "1.0"
-fail_fast: true
 stages:
   - prepare
   - release
