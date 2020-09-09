@@ -12,10 +12,19 @@ steps:
     revision: ${{CF_REVISION}}
     git: github
 
+  build_shell:
+    title: Build shell
+    type: build
+    working_directory: "${{clone}}/pipeline"
+    registry: utility
+    image_name: ${{CF_REPO_OWNER}}/${{CF_REPO_NAME}}
+    tag: ${{CF_BUILD_ID}}
+    disable_push: true
+
   test:
     stage: test
     title: Test
-    image: 289698421666.dkr.ecr.us-east-1.amazonaws.com/codefresh/shell:0.1.0
+    image: "${{build_shell}}"
     working_directory: "${{clone}}"
     commands:
       - gpg --import test/testing-key.pgp
