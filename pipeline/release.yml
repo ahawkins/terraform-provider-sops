@@ -45,7 +45,7 @@ steps:
       - >-
         git
         config
-        --set --local
+        --local
         user.signingkey
         "$(cat "${CF_VOLUME_PATH}/keys/terraform-provider.gpg")"
       - make crossbuild
